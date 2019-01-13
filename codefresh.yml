@@ -13,6 +13,7 @@ steps:
     dockerfile: Dockerfile
   unit_test_step:
     stage: test
+    image: aleksandrcodefresh/ng-CI-CD
     commands:
       - yarn test
     when:
