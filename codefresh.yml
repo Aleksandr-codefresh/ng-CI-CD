@@ -1,0 +1,21 @@
+version: '1.0'
+stages:
+  - test
+  - build
+steps:
+  unit_test_step:
+    stage: test
+    commands:
+      - yarn test
+  BuildingDockerImage:
+    title: Building Docker Image
+    type: build
+    image_name: aleksandrcodefresh/ng-CI-CD
+    working_directory: ./
+    tag: '${{CF_BRANCH_TAG_NORMALIZED}}'
+    dockerfile: Dockerfile
+    when:
+      steps:
+      - name: unit_test_step
+        on:
+        - success
